@@ -13,6 +13,12 @@ import overlayFile from "./markup/partials/overlayFile.hbs";
 
 import Handlebars from "handlebars/dist/handlebars.runtime";
 
+import avatar from "../img/avatar.svg";
+import clip from "../img/clip.svg";
+import icon_file from "../img/icon_file.svg";
+import icon_location from "../img/icon_location.svg";
+import icon_photo_video from "../img/icon_photo_video.svg";
+
 const userData = [
   {
     name: "email",
@@ -174,6 +180,12 @@ const PAGES = {
           btnText: "Удалить",
         },
       ],
+      imgs: {
+        clip,
+        icon_file,
+        icon_location,
+        icon_photo_video,
+      },
     },
   },
   404: {
@@ -191,6 +203,7 @@ const PAGES = {
       avatar: userAvatar,
       name: "Иван",
       userData: userData,
+      imgs: { avatar },
     },
   },
   profileInfoEdit: {
