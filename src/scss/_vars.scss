@@ -1,0 +1,44 @@
+:root {
+  --clr-black: hsl(0, 0%, 0%);
+  --clr-white: hsl(0, 0%, 100%);
+  --clr-red: hsl(0, 100%, 50%);
+
+  --clr-lightest-gray: #fafafa;
+  --clr-bg-search-input: #efefef;
+
+  --clr-gray: #a1a1a1;
+  --clr-very-dark-gray: #454545;
+  --clr-light-blue: #e4edfd;
+  
+
+  --clr-very-light-gray: #fbfbfb;
+  --clr-light-gray: #eaeaea;
+  
+  --clr-dark-gray: #999999;
+
+  --clr-placeholder: var(--clr-dark-gray);
+  --clr-chat-text: var(--clr-dark-gray);
+  --clr-profile-value: var(--clr-dark-gray);
+
+
+  --clr-blue: #3369f3;
+  --clr-bg-count-msg: var(--clr-blue);
+
+  --clr-bg-button: var(--clr-blue);
+  --clr-link: var(--clr-blue);
+  
+  --clr-bg-chat-list: var(--clr-lightest-gray);
+
+  --clr-profile-backbtn: var(--clr-very-light-gray);
+  --clr-profile-backbtn-focus: var(--clr-light-gray);
+
+  --clr-border: var(--clr-light-gray);
+
+  --clr-text: #1e1e1e;
+
+  --clr-error: #ff2f2f;
+
+  --fsz-body: 0.75rem;
+
+  --font-main: "Inter", sans-serif;
+}

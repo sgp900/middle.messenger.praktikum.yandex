@@ -1,0 +1,79 @@
+.profile {
+  min-width: 32rem;
+  margin: auto;
+  font-size: 0.8125rem;
+
+  a {
+    color: var(--clr-link);
+  }
+
+  &__wrapper {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  &__avatar-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 1.3125rem;
+    }
+  }
+
+  &__avatar {
+    width: 8.125rem;
+    height: 8.125rem;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+    }
+    &:hover .profile__btn-change {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  &__btn-change {
+    all: unset;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: rgba(#000, $alpha: 0.5);
+    color: var(--clr-white);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+
+    span {
+      display: block;
+      margin: auto;
+      width: min-content;
+    }
+  }
+
+  &__btn-back {
+    all: unset;
+    cursor: pointer;
+    border-right: 1px solid var(--clr-border);
+    height: 100vh;
+    width: 4rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--clr-profile-backbtn);
+    display: flex;
+    transition: all 0.3s ease-out;
+    &:hover {
+      background-color: var(--clr-profile-backbtn-focus);
+    }
+  }
+}
