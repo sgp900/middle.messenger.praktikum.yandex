@@ -1,0 +1,26 @@
+.searchInput {
+  &__input {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--clr-bg-search-input);
+    height: 2rem;
+    transition: all 0.3s ease;
+    padding: 0 5px;
+
+    &:focus + .searchInput__placeholder,
+    &:not(:placeholder-shown) + .searchInput__placeholder {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(0);
+    }
+  }
+
+  &__placeholder {
+    top: 0;
+    width: 100%;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+}

@@ -1,0 +1,17 @@
+ <div class="form-wrapper">
+    <form class="form {{classForm}}" action="#">
+      <h1 class="form__header">{{title}}</h1>
+        {{#each inputs}}
+          {{>placeHolderInput 
+            class = this.class
+            name = this.name
+            type = this.type
+            placeholder = this.placeholder
+            error = this.error
+          }}
+        {{/each}}
+      
+      <button class="button" onclick="renderPage('{{btnAction}}')">{{btnText}}</button>
+      <a class="form__link" href="#" onclick="renderPage('{{linkAction}}')">{{linkText}}</a>
+    </form>
+  </div>
