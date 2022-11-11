@@ -177,6 +177,7 @@ const PAGES = {
           caption: "Удалить пользователя",
           inputName: "delUser",
           inputPlaceHolder: "Логин",
+          inputValue: "Вадим",
           btnText: "Удалить",
         },
       ],
