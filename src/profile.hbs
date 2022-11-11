@@ -1,0 +1,33 @@
+{{>overlayFile}}
+<button onclick="renderPage('chat')" class="profile__btn-back">
+  <div class="arrow-button"></div>
+</button>
+<div class="profile__wrapper">
+  <div class="profile">
+    <div class="profile__avatar-block">
+      <div class="profile__avatar">
+        <img src='{{imgs.avatar}}' alt="avatar" />
+        <button
+          class="profile__btn-change"
+          onClick="let overlay = document.querySelector('.overlay');
+                 overlay.classList.toggle('hide');"
+        >
+          <span>Поменять аватар</span>
+        </button>
+      </div>
+      {{#if name}}
+        <h1>{{name}}</h1>
+      {{/if}}
+      
+    </div>
+    {{#if show}}
+      {{>profile_show data=userData}}
+    {{/if}}
+    {{#if edit}}
+      {{>profile_edit data=userData}}
+    {{/if}}
+    {{#if pswd}}
+      {{>profile_pswd data=password}}
+    {{/if}}
+  </div>
+</div>

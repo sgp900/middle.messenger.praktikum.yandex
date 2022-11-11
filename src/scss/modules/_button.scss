@@ -1,0 +1,12 @@
+.button {
+  all: unset;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--clr-white);
+  border-radius: 0.5rem;
+  background-color: var(--clr-bg-button);
+  width: 17.5rem;
+  height: 2.3125rem;
+  text-align: center;
+}
