@@ -1,23 +1,23 @@
-import signInUp from "./login-registration.hbs";
-import chat from "./chat.hbs";
-import profile from "./profile.hbs";
-import errors from "./errors.hbs";
-import channel from "./markup/partials/channel.hbs";
-import signInUpInput from "./markup/partials/placeHolderInput.hbs";
-import searchInput from "./markup/partials/searchInput.hbs";
-import profile_show from "./markup/partials/profile_show.hbs";
-import profile_edit from "./markup/partials/profile_edit.hbs";
-import profile_pswd from "./markup/partials/profile_pswd.hbs";
-import overlayInput from "./markup/partials/overlayInput.hbs";
-import overlayFile from "./markup/partials/overlayFile.hbs";
+import signInUp from "./markup/pages/loginRegistration.hbs";
+import chat from "./markup/pages/chat.hbs";
+import profile from "./markup/pages/profile.hbs";
+import profileShow from "./markup/pages/profileShow.hbs";
+import profileEdit from "./markup/pages/profileEdit.hbs";
+import profilePswd from "./markup/pages/profilePswd.hbs";
+import errors from "./markup/pages/errors.hbs";
+import channel from "./markup/components/channel.hbs";
+import signInUpInput from "./markup/components/placeHolderInput.hbs";
+import searchInput from "./markup/components/searchInput.hbs";
+import overlayInput from "./markup/components/overlayInput.hbs";
+import overlayFile from "./markup/components/overlayFile.hbs";
 
 import Handlebars from "handlebars/dist/handlebars.runtime";
 
 import avatar from "../img/avatar.svg";
 import clip from "../img/clip.svg";
-import icon_file from "../img/icon_file.svg";
-import icon_location from "../img/icon_location.svg";
-import icon_photo_video from "../img/icon_photo_video.svg";
+import iconFile from "../img/iconFile.svg";
+import iconLocation from "../img/iconLocation.svg";
+import iconPhotoVideo from "../img/iconPhotoVideo.svg";
 
 const userData = [
   {
@@ -183,9 +183,9 @@ const PAGES = {
       ],
       imgs: {
         clip,
-        icon_file,
-        icon_location,
-        icon_photo_video,
+        iconFile,
+        iconLocation,
+        iconPhotoVideo,
       },
     },
   },
@@ -194,6 +194,14 @@ const PAGES = {
     data: {
       code: "404",
       text: "Не туда попали",
+      linkText: "Назад к чатам",
+    },
+  },
+  500: {
+    template: errors,
+    data: {
+      code: "500",
+      text: "Мы уже фиксим",
       linkText: "Назад к чатам",
     },
   },
@@ -213,6 +221,7 @@ const PAGES = {
       edit: true,
       avatar: userAvatar,
       userData: userData,
+      imgs: { avatar },
     },
   },
   profilePassword: {
@@ -221,6 +230,7 @@ const PAGES = {
       pswd: true,
       avatar: userAvatar,
       password: "12345",
+      imgs: { avatar },
     },
   },
 };
@@ -246,9 +256,9 @@ document.addEventListener("DOMContentLoaded", () => {
   Handlebars.registerPartial("channel", channel);
   Handlebars.registerPartial("overlayInput", overlayInput);
   Handlebars.registerPartial("overlayFile", overlayFile);
-  Handlebars.registerPartial("profile_show", profile_show);
-  Handlebars.registerPartial("profile_edit", profile_edit);
-  Handlebars.registerPartial("profile_pswd", profile_pswd);
+  Handlebars.registerPartial("profileShow", profileShow);
+  Handlebars.registerPartial("profileEdit", profileEdit);
+  Handlebars.registerPartial("profilePswd", profilePswd);
   const html = signInUp(PAGES["login"].data);
 
   const root = document.querySelector("#app");

@@ -23,7 +23,7 @@
       outline: none;
     }
 
-    &:focus + .placeHolderInput__placeholder, 
+    &:focus + .placeHolderInput__placeholder,
     &:not(:placeholder-shown) + .placeHolderInput__placeholder {
       transform: translate3d(0, -0.6375rem, 0) scale(0.75);
     }

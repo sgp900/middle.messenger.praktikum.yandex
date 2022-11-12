@@ -1,4 +1,4 @@
-.error{
+.error {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,17 +7,15 @@
   &__wrapper {
     min-height: 100vh;
     display: flex;
-    
   }
 
-  &__code{
+  &__code {
     font-size: 2.5rem;
-    margin-bottom: 1.25rem;;
+    margin-bottom: 1.25rem;
   }
   &__text {
     font-size: 1.25rem;
     margin-bottom: 4rem;
-    
   }
   &__link {
     font-size: 0.6875rem;
