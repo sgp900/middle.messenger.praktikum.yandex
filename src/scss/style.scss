@@ -1,10 +1,10 @@
 @use "vars";
 @use "base";
 
-@use "chats_page";
-@use "login-registration_page";
-@use "errors_page";
-@use "profile_page";
+@use "chatsPage";
+@use "loginRegistrationPage";
+@use "errorsPage";
+@use "profilePage";
 
 @use "./modules/_placeHolderInput";
 @use "./modules/_searchInput";

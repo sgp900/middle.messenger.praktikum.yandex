@@ -1,3 +1,4 @@
+<main class="chats-wrapper">
 {{#each overlays}}
   {{>overlayInput
     class = this.class
@@ -8,8 +9,7 @@
     inputValue = this.inputValue
 }}
 {{/each}}
-<div class="chats-wrapper">
-<div class="left-side">
+<section class="left-side">
     <div class="show-profile">
       <button class="show-profile__btn" onclick="renderPage('profile')">{{buttonText}}</button>
     </div>
@@ -34,8 +34,8 @@
         {{/each}}
       </ul>
     </aside>
-  </div>
-  <main class="right-side">
+  </section>
+  <section class="right-side">
     <div class="chat">
       <div class="chat-head">
         <div class="chat-head__user">
@@ -70,27 +70,38 @@
         </div>
 
       </div>
-      <div class="chat__msg chat__empty">Выберите чат чтобы отправить сообщение</div>
+      <div class="chat__msg chat__empty">
+        <p>Выберите чат чтобы отправить сообщение</p>
+        <nav>
+          <p>Или посетите:</p>
+          <nav>
+          <ul role="list">
+            <li><a onclick="renderPage('pagenotfound')" href="#">Нашу фирменную 404-ю страницу</a></li>
+            <li><a onclick="renderPage('500')" href="#">Нашу незабываемую страницу с кодом 500</a></li>
+          </ul>
+          </nav>
+        </nav>
+        </div>
       <div class="chat-newmsg">
 
         <div class="btn-drop__wrapper">
           <button class="btn-drop__btn chat-newmsg__btn">
-            <img src="{{imgs.clip}}" alt="clip" />
+            <img src="{{imgs.clip}}" alt="Прикрепить файл" />
           </button>
           <div class="btn-drop__drop">
             <div class="btn-drop__drop-wrapper">
               <ul class="btn-drop__drop-list" role="list">
                 <li class="btn-drop__item">
                   <button><div class="btn-drop__drop-icon">
-                    <img src="{{imgs.icon_photo_video}}" alt="">
+                    <img src="{{imgs.iconPhotoVideo}}" alt="Добавить фото или видео">
                   </div><p>Фото или Видео</p></button>
                 </li>
                 <li class="btn-drop__item">
-                  <button><div class="btn-drop__drop-icon"><img src="{{imgs.icon_file}}" alt=""></div><p>Файл</p></button>
+                  <button><div class="btn-drop__drop-icon"><img src="{{imgs.iconFile}}" alt="Добавить файл"></div><p>Файл</p></button>
                 </li>
                 <li class="btn-drop__item">
                   <button><div class="btn-drop__drop-icon">
-                    <img src="{{imgs.icon_location}}" alt="">
+                    <img src="{{imgs.iconLocation}}" alt="Добавить локацию">
                   </div><p>Локация</p></button>
                 </li>
               </ul>
@@ -102,5 +113,5 @@
         <button class="arrow-button"></button>
       </div>
     </div>
-  </main>
-</div>
+  </section>
+</main>
