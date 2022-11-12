@@ -1,0 +1,23 @@
+<ul class="profile-list">
+  {{#each data}}
+    {{#if this.name}}
+      <li class="profile-list__item">
+        <span class="profile-list__item-name">{{this.title}}</span>
+        <span class="profile-list__item-value">{{this.data}}</span>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+<nav class="profile-action">
+  <ul class="profile-list">
+    <li class="profile-list__item">
+      <a onclick="renderPage('profileInfoEdit')" href="#">Изменить данные</a>
+    </li>
+    <li class="profile-list__item">
+      <a onclick="renderPage('profilePassword')" href="#">Изменить пароль</a>
+    </li>
+    <li class="profile-list__item profile-list__item-warning">
+      <a onclick="renderPage('login')" href="#">Выйти</a>
+    </li>
+  </ul>
+</nav>

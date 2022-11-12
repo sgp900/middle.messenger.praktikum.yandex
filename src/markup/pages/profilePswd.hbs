@@ -1,0 +1,19 @@
+<form action="#">
+<ul class="profile-list profile-edit">
+  <li class="profile-list__item">
+    <label class="profile-list__item-name" for="oldPassword">Старый пароль</label>
+    <input type="password" class="profile-list__input" id="oldPassword" value="{{data}}" name="oldPassword"></input>
+  </li> 
+  <li class="profile-list__item">
+    <label class="profile-list__item-name" for="newPassword">Новый пароль</label>
+    <input type="password" class="profile-list__input" id="newPassword" value="" name="newPassword"></input>
+  </li>    
+  <li class="profile-list__item">
+    <label  class="profile-list__item-name" for="repPassword">Повторите новый пароль</label>
+    <input type="password" class="profile-list__input" id="repPassword" value="" name="repPassword"></input>
+  </li>    
+</ul>
+<div class="profile-action">
+  <button onclick="renderPage('profile')" class="button save-info">Сохранить</button>
+</div>
+</form>

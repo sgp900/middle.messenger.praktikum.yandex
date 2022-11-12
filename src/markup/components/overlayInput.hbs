@@ -1,0 +1,18 @@
+<div class="overlay {{class}} hide">
+  <div class="overlay-wrapper">
+    <h4 class="overlay__caption">{{caption}}</h4>
+    {{>placeHolderInput 
+            name = inputName
+            type = "text"
+            placeholder = inputPlaceHolder
+            value = inputValue
+          }}
+    <button
+      class="button"
+      onClick="let overlay = document.querySelector('.overlay.{{class}}');
+                 overlay.classList.toggle('hide');"
+    >
+      {{btnText}}
+    </button>
+  </div>
+</div>

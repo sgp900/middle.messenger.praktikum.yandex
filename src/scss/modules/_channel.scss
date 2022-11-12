@@ -1,0 +1,44 @@
+.channel {
+  height: 4.375rem;
+  padding: 0.625rem 0;
+  display: grid;
+  grid-template-columns: 3.5rem auto 2rem;
+  grid-template-rows: 1.25rem 1fr;
+  border-bottom: 1px solid var(--clr-border);
+  &__avatar {
+    grid-row: 1/3;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--clr-light-gray);
+    align-self: center;
+  }
+  &__name {
+    color: var(--clr-text);
+    font-weight: 600;
+    font-size: 0.8125rem;
+  }
+  &__msg {
+    line-height: 0.9375rem;
+    height: 2rem;
+    overflow: hidden;
+  }
+  &__your-msg {
+    color: var(--clr-text);
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+
+  &__msg-count {
+    align-self: center;
+    justify-self: center;
+    background: var(--clr-bg-count-msg);
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

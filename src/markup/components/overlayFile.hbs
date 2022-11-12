@@ -1,0 +1,19 @@
+<div class="overlay file__overlay hide">
+  <div class="overlay-wrapper">
+    <h4 class="overlay__caption">Загрузите файл</h4>
+    <label for="file-upload">Выбрать файл на компьютере</label>
+    <input
+      type="file"
+      name="avatar"
+      id="file-upload"
+      accept="image/png, image/jpg"
+    />
+    <button
+      class="button"
+      onClick="let overlay = document.querySelector('.overlay.file__overlay');
+                 overlay.classList.toggle('hide');"
+    >
+      Поменять
+    </button>
+  </div>
+</div>
