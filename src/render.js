@@ -236,7 +236,6 @@ const PAGES = {
 };
 
 function renderPage(page) {
-  console.log(page, page in PAGES);
   const root = document.querySelector("#app");
 
   if (!(page in PAGES)) {
