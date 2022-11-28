@@ -21,7 +21,7 @@ html:focus-within {
 body {
   min-height: 100vh;
   margin: 0 auto;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
   line-height: 1.5;
   font-family: var(--font-main);
   font-weight: 500;
@@ -35,12 +35,13 @@ h4 {
   color: var(--clr-text);
 }
 
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
 a {
   text-decoration: none;
   color: var(--clr-link);
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
 }
 
 img,

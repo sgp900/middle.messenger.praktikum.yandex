@@ -1,0 +1,24 @@
+.show-profile {
+  &__btn {
+    all: unset;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    margin-right: 0;
+    text-decoration: none;
+
+    &::after {
+      content: " 〉";
+    }
+  }
+}
+
+.channels-search {
+  margin-top: 1.5rem;
+}
+
+.channels__list {
+  margin-top: 0.875rem;
+  border-top: 1px solid var(--clr-border);
+}

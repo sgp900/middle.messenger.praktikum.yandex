@@ -1,0 +1,57 @@
+<main>
+  <div class="overlay file__overlay hide">
+    <div class="overlay-wrapper">
+      <h4 class="overlay__caption">Загрузите файл</h4>
+      <label for="file-upload">Выбрать файл на компьютере</label>
+      <input
+        type="file"
+        name="avatar"
+        id="file-upload"
+        accept="image/png, image/jpg"
+      />
+      <button
+        class="button"
+        onClick="let overlay = document.querySelector('.overlay.file__overlay');
+                 overlay.classList.toggle('hide');"
+      >
+        Поменять
+      </button>
+    </div>
+  </div>
+  <button onclick="renderPage('messenger')" class="profile__btn-back">
+    <div class="arrow-button"></div>
+  </button>
+  <div class="profile__wrapper">
+    <div class="profile">
+      <div class="profile__avatar-block">
+        <div class="profile__avatar">
+          <img src="{{avatar}}" alt="аватар пользователя" />
+          <button
+            class="profile__btn-change"
+            onClick="let overlay = document.querySelector('.overlay');
+                 overlay.classList.toggle('hide');"
+          >
+            <span>Поменять аватар</span>
+          </button>
+        </div>
+        {{#if name}}
+          <h1>{{name}}</h1>
+        {{/if}}
+
+      </div>
+      <form action="#">
+        <ul class="profile-list profile-edit">
+          {{#each fields}}
+            <li>
+              {{{this}}}
+            </li>
+          {{/each}}
+        </ul>
+        <div class="profile-action">
+          {{{saveBtn}}}
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>

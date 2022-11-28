@@ -1,0 +1,24 @@
+{
+  "extends": "airbnb-base",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "max-len": [2, 200],
+    "max-params": [2, 3],
+    "linebreak-style": ["error", "windows"],
+    "quotes": ["error", "double",  { "allowTemplateLiterals": true }],
+    "no-console": ["error", { "allow": ["log", "warn", "error"] }],
+    "import/no-unresolved": "off",
+    "no-underscore-dangle": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never"
+      }
+    ]
+  }
+}

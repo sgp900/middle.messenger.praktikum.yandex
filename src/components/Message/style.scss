@@ -1,0 +1,17 @@
+.message {
+  padding: 1rem;
+  background-color: var(--clr-msg-bg);
+  box-shadow: 0 4px 4px hsl(0deg 0% 0% / 25%);
+  border-radius: 12px;
+  width: fit-content;
+
+  &-your {
+    background-color: #e4edfd;
+    align-self: flex-end;
+  }
+
+  a {
+    color: var(--clr-link);
+    cursor: pointer;
+  }
+}

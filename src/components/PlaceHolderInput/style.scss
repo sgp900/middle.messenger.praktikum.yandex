@@ -1,0 +1,55 @@
+.placeHolderInput {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 0.8125rem;
+
+  &__placeholder {
+    position: absolute;
+    top: 0.85rem;
+    left: 0;
+    color: var(--clr-placeholder);
+    font-weight: 500;
+    transform-origin: 0 0;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.2s ease;
+    pointer-events: none;
+  }
+
+  &__error {
+    display: none;
+    margin-top: 0.15rem;
+    font-size: 0.65rem;
+
+    &--alarm {
+      color: var(--clr-error);
+    }
+  }
+
+  &__input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--clr-blue);
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    padding: 1rem 0 0;
+    height: 2.5rem;
+    transition: all 0.15s ease;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus + .placeHolderInput__placeholder,
+    &:not(:placeholder-shown) + .placeHolderInput__placeholder {
+      transform: translate3d(0, -0.6375rem, 0) scale(0.75);
+    }
+  }
+}
+
+.placeHolderInput + .placeHolderInput {
+  margin-top: 0.5rem;
+}
