@@ -1,0 +1,40 @@
+.profile-listitem {
+  width: 100%;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--clr-border);
+
+  &__error {
+    color: var(--clr-error);
+    flex-basis: 100%;
+    font-size: 0.7rem;
+    display: none;
+  }
+
+  &__name {
+    flex-basis: fit-content;
+  }
+
+  &__warning a {
+    color: var(--clr-red);
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    text-align: right;
+    outline: none;
+
+    &:focus {
+      font-weight: 500;
+    }
+  }
+
+  &__value {
+    color: var(--clr-profile-value);
+  }
+}

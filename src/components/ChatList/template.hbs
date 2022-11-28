@@ -1,0 +1,15 @@
+<div>
+  <div class="show-profile">
+    {{{showProfileBtn}}}
+  </div>
+  <aside class="channels">
+    <div class="channels-search">
+      {{{searchInput}}}
+    </div>
+    <ul class="channels__list" role="list">
+      {{#each chats}}
+        {{{this}}}
+      {{/each}}
+    </ul>
+  </aside>
+</div>

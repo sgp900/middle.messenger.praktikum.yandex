@@ -1,0 +1,14 @@
+<li class="chat">
+  <div class="chat__avatar"><img src="{{avatar}}" /></div>
+  <p class="chat__name">{{name}}</p>
+  <p class="chat__time">{{time}}</p>
+  <p class="chat__msg">
+    {{#if your}}
+      <span class="chat__your-msg">Вы:</span>
+    {{/if}}
+    {{msg}}
+  </p>
+  {{#if msgCount}}
+    <p class="chat__msg-count">{{msgCount}}</p>
+  {{/if}}
+</li>

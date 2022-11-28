@@ -1,0 +1,13 @@
+<main class="form-wrapper">
+    <form class="form {{classWrapper}}" action="#">
+      <h1 class="form__header">{{title}}</h1>
+      {{#each fields}}
+        {{{this}}}
+      {{/each}}
+        {{{loginButton}}}
+      <nav>
+        <a class="form__link" href="#" onclick="renderPage('{{linkAction}}')">{{linkText}}
+      </nav>
+      </a>
+    </form>
+</main>

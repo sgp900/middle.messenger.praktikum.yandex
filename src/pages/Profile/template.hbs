@@ -1,0 +1,67 @@
+<main>
+  <div class="overlay file__overlay hide">
+    <div class="overlay-wrapper">
+      <h4 class="overlay__caption">Загрузите файл</h4>
+      <label for="file-upload">Выбрать файл на компьютере</label>
+      <input
+        type="file"
+        name="avatar"
+        id="file-upload"
+        accept="image/png, image/jpg"
+      />
+      <button
+        class="button"
+        onClick="let overlay = document.querySelector('.overlay.file__overlay');
+                 overlay.classList.toggle('hide');"
+      >
+        Поменять
+      </button>
+    </div>
+  </div>
+  <button onclick="renderPage('messenger')" class="profile__btn-back">
+    <div class="arrow-button"></div>
+  </button>
+  <div class="profile__wrapper">
+    <div class="profile">
+      <div class="profile__avatar-block">
+        <div class="profile__avatar">
+          <img src="{{avatar}}" alt="аватар пользователя" />
+          <button
+            class="profile__btn-change"
+            onClick="let overlay = document.querySelector('.overlay');
+                 overlay.classList.toggle('hide');"
+          >
+            <span>Поменять аватар</span>
+          </button>
+        </div>
+        {{#if name}}
+          <h1>{{name}}</h1>
+        {{/if}}
+
+      </div>
+      <ul class="profile-list">
+        {{#each inputData}}
+          {{#if this.name}}
+            <li class="profile-listitem">
+              <span class="profile-listitem__name">{{this.title}}</span>
+              <span class="profile-listitem__value">{{this.data}}</span>
+            </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+      <nav class="profile-action">
+        <ul class="profile-list">
+          <li class="profile-listitem">
+            <a onclick="renderPage('profileEdit')" href="#">Изменить данные</a>
+          </li>
+          <li class="profile-listitem">
+            <a onclick="renderPage('profilePassword')" href="#">Изменить пароль</a>
+          </li>
+          <li class="profile-listitem profile-listitem__warning">
+            <a onclick="renderPage('login')" href="#">Выйти</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</main>

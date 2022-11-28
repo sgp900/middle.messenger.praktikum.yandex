@@ -1,0 +1,43 @@
+.form-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.875rem;
+  width: 21.25rem;
+  margin: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 6px hsl(0deg 0% 0% / 14%);
+
+  &__header {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+  }
+
+  &__link {
+    margin-top: 0.875rem;
+    text-decoration: none;
+    color: var(--clr-link);
+    font-weight: 500;
+    font-size: 0.6875rem;
+  }
+}
+
+.form-login {
+  .button {
+    margin-top: 11.25rem;
+    margin-bottom: 0.875rem;
+  }
+}
+
+.form-registration {
+  .button {
+    margin-top: 3.25rem;
+    margin-bottom: 0.875rem;
+  }
+}
