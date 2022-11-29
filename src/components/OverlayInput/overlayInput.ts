@@ -1,9 +1,9 @@
-import Block from "../../utils/block";
+import { Block } from "../../utils/block";
+import { PlaceHolderInput } from "../PlaceHolderInput/placeHolderInput";
+import { Button } from "../Button/button";
 
 import template from "./template.hbs";
 import styles from "./style.scss";
-import { PlaceHolderInput } from "../PlaceHolderInput/placeHolderInput";
-import Button from "../Button/button";
 
 export interface OverlayInputProps {
   class?: string;

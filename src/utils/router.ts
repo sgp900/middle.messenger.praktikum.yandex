@@ -1,14 +1,14 @@
-import Validation from "./validation";
+import { Validation } from "./validation";
 
-import LoginRegistration from "../pages/LoginRegistration/loginRegistration";
-import Messenger from "../pages/Messenger/messenger";
-import Profile from "../pages/Profile/profile";
-import ProfileEditInfo from "../pages/ProfileEdit/profileEdit";
-import ErrorPage from "../pages/ErrorPage/errorPage";
+import { LoginRegistration } from "../pages/LoginRegistration/loginRegistration";
+import { Messenger } from "../pages/Messenger/messenger";
+import { Profile } from "../pages/Profile/profile";
+import { ProfileEdit } from "../pages/ProfileEdit/profileEdit";
+import { ErrorPage } from "../pages/ErrorPage/errorPage";
 
-import Block from "./block";
+import { Block } from "./block";
 
-export default function router(page: string): Block {
+export function router(page: string): Block {
   switch (page) {
     case "login":
       return new LoginRegistration({
@@ -159,7 +159,7 @@ export default function router(page: string): Block {
       });
 
     case "profileEdit":
-      return new ProfileEditInfo({
+      return new ProfileEdit({
         fields: [
           {
             name: "email",
@@ -212,8 +212,7 @@ export default function router(page: string): Block {
         ],
       });
     case "profilePassword":
-      // return new ProfileEditPass({
-      return new ProfileEditInfo({
+      return new ProfileEdit({
         fields: [
           {
             name: "oldPassword",
@@ -260,11 +259,6 @@ export default function router(page: string): Block {
   }
 }
 
-// declare global {
-//   interface Window {
-//     router: (page: string) => Block;
-//   }
-// }
 const global = window as any;
 
 global.router = router;

@@ -1,5 +1,5 @@
-import Block from "../../utils/block";
-import Input from "../Input/input";
+import { Block } from "../../utils/block";
+import { Input } from "../Input/input";
 
 import template from "./template.hbs";
 import styles from "./style.scss";
@@ -11,7 +11,6 @@ export interface PlaceHolderInputProps {
   placeholder: string;
   error?: string;
   value?: string;
-  // eslint-disable-next-line no-unused-vars
   funcValid?: (value: string) => boolean;
   events?: Record<string, () => void>;
 }
@@ -32,7 +31,7 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
           const { value } = e!.target as HTMLInputElement;
           if (!this.isFieldOk(value)) {
             this.element!.querySelector(
-              ".placeHolderInput__error",
+              ".placeHolderInput__error"
             )!.classList.toggle("placeHolderInput__error--alarm", true);
           }
         },
@@ -40,7 +39,6 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
     return oldProps.error !== newProps.error;
   }
@@ -52,13 +50,13 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
 
     if (this.props.funcValid(value)) {
       this.element!.querySelector<HTMLElement>(
-        `.${classElement}__error`,
+        `.${classElement}__error`
       )!.style.display = "none";
       return true;
     }
 
     this.element!.querySelector<HTMLElement>(
-      `.${classElement}__error`,
+      `.${classElement}__error`
     )!.style.display = "block";
 
     return false;

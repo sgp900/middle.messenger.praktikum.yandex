@@ -1,14 +1,15 @@
-import Block from "../../utils/block";
+import { Block } from "../../utils/block";
 import { PlaceHolderInput } from "../../components/PlaceHolderInput/placeHolderInput";
-import CurrentChat, {
+import {
+  CurrentChat,
   CurrentChatProps,
 } from "../../components/CurrentChat/currentChat";
 import { ChatProps } from "../../components/Chat/chat";
 import { OverlayInput } from "../../components/OverlayInput/overlayInput";
-import Button from "../../components/Button/button";
+import { Button } from "../../components/Button/button";
+import { ChatList } from "../../components/ChatList/chatList";
 import template from "./template.hbs";
 import styles from "./style.scss";
-import ChatList from "../../components/ChatList/chatList";
 
 export interface MessengerProps {
   userName: string;
@@ -16,7 +17,7 @@ export interface MessengerProps {
   currentChat: CurrentChatProps;
 }
 
-export default class Messenger extends Block<MessengerProps> {
+export class Messenger extends Block<MessengerProps> {
   init() {
     this.children.currentChat = new CurrentChat(this.props.currentChat);
 

@@ -1,13 +1,13 @@
-import Block from "../../utils/block";
-import renderPage from "../../utils/render";
+import { Block } from "../../utils/block";
+import { renderPage } from "../../utils/render";
 import {
   PlaceHolderInput,
   PlaceHolderInputProps,
 } from "../../components/PlaceHolderInput/placeHolderInput";
-import Button from "../../components/Button/button";
+import { Button } from "../../components/Button/button";
 import styles from "./style.scss";
 import template from "./template.hbs";
-import HTTPTransport from "../../utils/HTTPTransport";
+import { HTTPTransport } from "../../utils/HTTPTransport";
 
 interface LoginRegistrationProps {
   action: string;
@@ -21,10 +21,10 @@ interface LoginRegistrationProps {
   events?: Record<string, () => void>;
 }
 
-export default class LoginRegistration extends Block<LoginRegistrationProps> {
+export class LoginRegistration extends Block<LoginRegistrationProps> {
   init() {
     this.children.fields = LoginRegistration.createPlaceHolderInputs(
-      this.props.fields,
+      this.props.fields
     );
 
     this.props.events = { submit: this.handleSubmit.bind(this) };
@@ -48,7 +48,7 @@ export default class LoginRegistration extends Block<LoginRegistrationProps> {
     event?.preventDefault();
 
     const [fail, toServer] = LoginRegistration.checkFields(
-      this.children.fields as Array<PlaceHolderInput>,
+      this.children.fields as Array<PlaceHolderInput>
     );
     if (!fail) {
       console.log(toServer);
@@ -68,7 +68,7 @@ export default class LoginRegistration extends Block<LoginRegistrationProps> {
   }
 
   private static checkFields(
-    fields: Array<PlaceHolderInput>,
+    fields: Array<PlaceHolderInput>
   ): [boolean, Record<string, string>] {
     let fail = false;
     // eslint-disable-next-line prefer-const

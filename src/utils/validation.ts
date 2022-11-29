@@ -1,4 +1,4 @@
-export default class Validation {
+export class Validation {
   private static valid(value: string, regularEx: string, flags: string = "") {
     const rExp: RegExp = new RegExp(regularEx, flags);
 
@@ -24,31 +24,8 @@ export default class Validation {
   static validPhone(value: string) {
     return Validation.valid(value, "^\\+?[\\d]{10,15}$");
   }
-  //   if (/^\+?[\d]{10,15}$/.test(value)) {
 
   static validMsg(value: string) {
     return Validation.valid(value, "^.+$");
   }
-
-  // static checkFields(fields: Array<Block>) {
-  //   let fail = false;
-  //   let toServer: Record<string, string> = {};
-
-  //   fields.forEach((child) => {
-  //     const inputElement = child.element!.querySelector("input");
-  //     if (inputElement !== null) {
-  //       let name = inputElement!.name;
-  //       let value = inputElement!.value.trim();
-
-  //       toServer[name] = value;
-
-  //       // if (!child.props.funcValid.call(child, value)) {
-  //       if (!child.isFieldOk(value)) {
-  //         fail = true;
-  //       }
-  //     }
-  //   });
-
-  //   return { fail, toServer };
-  // }
 }

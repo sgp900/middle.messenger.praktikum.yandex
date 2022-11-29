@@ -38,6 +38,7 @@ h4 {
 a {
   text-decoration: none;
   color: var(--clr-link);
+  cursor: pointer;
 }
 
 a:not([class]) {

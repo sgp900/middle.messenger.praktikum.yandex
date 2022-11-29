@@ -1,5 +1,5 @@
-import Block from "../../utils/block";
-import Input from "../Input/input";
+import { Block } from "../../utils/block";
+import { Input } from "../Input/input";
 import template from "./template.hbs";
 import styles from "./style.scss";
 
@@ -8,7 +8,6 @@ export interface ProfileFieldProps {
   title: string;
   error: string;
   data?: string;
-  // eslint-disable-next-line no-unused-vars
   funcValid: (value: string) => boolean;
 }
 
@@ -27,7 +26,7 @@ export class ProfileField extends Block<ProfileFieldProps> {
           const { value } = e!.target as HTMLInputElement;
           if (!this.isFieldOk(value)) {
             this.element!.querySelector(
-              ".profile-listitem__error",
+              ".profile-listitem__error"
             )!.classList.toggle("profile-listitem__error--alarm", true);
           }
         },
@@ -42,12 +41,12 @@ export class ProfileField extends Block<ProfileFieldProps> {
 
     if (this.props.funcValid(value)) {
       this.element!.querySelector<HTMLElement>(
-        `.${classElement}__error`,
+        `.${classElement}__error`
       )!.style.display = "none";
       return true;
     }
     this.element!.querySelector<HTMLElement>(
-      `.${classElement}__error`,
+      `.${classElement}__error`
     )!.style.display = "block";
     return false;
   }

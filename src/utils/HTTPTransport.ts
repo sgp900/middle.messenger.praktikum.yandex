@@ -9,64 +9,50 @@ function queryStringify(data: Object) {
   return ret;
 }
 
+enum METHODS {
+  GET = "GET",
+  PUT = "PUT",
+  POST = "POST",
+  DELETE = "DELETE",
+}
+
 type Options = {
-  method?: string;
-  headers?: Object;
+  method?: METHODS;
+  headers?: Record<string, string>;
   data?: Object;
   timeout?: number;
 };
 
-// eslint-disable-next-line no-unused-vars
 type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
 
-const METHODS = {
-  GET: "GET",
-  PUT: "PUT",
-  POST: "POST",
-  DELETE: "DELETE",
-};
-
-export default class HTTPTransport {
-  // eslint-disable-next-line no-unused-vars
+export class HTTPTransport {
   get: HTTPMethod = (url, options = {}) => {
     const { data } = options;
     if (data) {
-      // eslint-disable-next-line no-param-reassign
       delete options.data;
-      // eslint-disable-next-line no-param-reassign
       url += queryStringify(data);
     }
 
     return this.request(
       url,
       { ...options, method: METHODS.GET },
-      options.timeout,
+      options.timeout
     );
   };
 
-  post: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.POST },
-    options.timeout,
-  );
+  post: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
 
-  put: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.PUT },
-    options.timeout,
-  );
+  put: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
 
-  delete: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.DELETE },
-    options.timeout,
-  );
+  delete: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
-  // eslint-disable-next-line class-methods-use-this
   private request = (
     url: string,
-    options: Options = { method: "GET" },
-    timeout: number = 3000,
+    options: Options = { method: METHODS.GET },
+    timeout: number = 3000
   ) => {
     const { method, headers, data } = options;
 
@@ -82,7 +68,9 @@ export default class HTTPTransport {
         });
       }
 
-      xhr.onload = () => { resolve(xhr); };
+      xhr.onload = () => {
+        resolve(xhr);
+      };
 
       xhr.onabort = reject;
       xhr.onerror = reject;

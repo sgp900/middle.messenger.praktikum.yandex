@@ -1,11 +1,11 @@
-import Block from "../../utils/block";
-import renderPage from "../../utils/render";
+import { Block } from "../../utils/block";
+import { renderPage } from "../../utils/render";
 
 import styles from "./style.scss";
 import template from "./template.hbs";
 import defaultAvatar from "../../../img/avatar.svg";
-import Button from "../../components/Button/button";
-import HTTPTransport from "../../utils/HTTPTransport";
+import { Button } from "../../components/Button/button";
+import { HTTPTransport } from "../../utils/HTTPTransport";
 import {
   ProfileField,
   ProfileFieldProps,
@@ -13,14 +13,12 @@ import {
 
 export interface ProfileEditProps {
   avatar?: string;
-  // eslint-disable-next-line no-unused-vars
   fields: ProfileFieldProps[];
 }
 
-export default class ProfileEdit extends Block<ProfileEditProps> {
+export class ProfileEdit extends Block<ProfileEditProps> {
   constructor(props: ProfileEditProps) {
     if (!props.avatar) {
-      // eslint-disable-next-line no-param-reassign
       props.avatar = defaultAvatar;
     }
     super(props);
@@ -38,11 +36,11 @@ export default class ProfileEdit extends Block<ProfileEditProps> {
   }
 
   private static createProfileFields(props: ProfileFieldProps[]) {
-    return props.map((data) => new ProfileField({ ...data }));
+    return props.map((data) => new ProfileField(data));
   }
 
   private static checkFields(
-    fields: Array<ProfileField>,
+    fields: Array<ProfileField>
   ): [boolean, Record<string, string>] {
     let fail = false;
     // eslint-disable-next-line prefer-const
@@ -68,7 +66,7 @@ export default class ProfileEdit extends Block<ProfileEditProps> {
     event?.preventDefault();
 
     const [fail, toServer] = ProfileEdit.checkFields(
-      this.children.fields as Array<ProfileField>,
+      this.children.fields as Array<ProfileField>
     );
     if (!fail) {
       console.log(toServer);
