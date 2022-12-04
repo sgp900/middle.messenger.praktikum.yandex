@@ -8,13 +8,6 @@
   align-items: center;
   border-bottom: 1px solid var(--clr-border);
 
-  &__error {
-    color: var(--clr-error);
-    flex-basis: 100%;
-    font-size: 0.7rem;
-    display: none;
-  }
-
   &__name {
     flex-basis: fit-content;
   }

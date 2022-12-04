@@ -1,5 +1,6 @@
 import { Block } from "../../utils/block";
 import { Input } from "../Input/input";
+import { ErrorBox } from "./ErrorBox/errorBox";
 
 import template from "./template.hbs";
 import styles from "./style.scss";
@@ -24,19 +25,27 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
       data: this.props.value,
       events: {
         focus: (e) => {
-          const { value } = e!.target as HTMLInputElement;
+          if (!e) return;
+
+          const { value } = e.target as HTMLInputElement;
           this.isFieldOk(value);
         },
         blur: (e) => {
-          const { value } = e!.target as HTMLInputElement;
+          if (!e || !e.target) return;
+
+          const errorBox = this.children.errorBox as ErrorBox;
+          const { value } = e.target as HTMLInputElement;
+
           if (!this.isFieldOk(value)) {
-            this.element!.querySelector(
-              ".placeHolderInput__error"
-            )!.classList.toggle("placeHolderInput__error--alarm", true);
+            errorBox.props.class = "placeHolderInput__error--alarm";
+          } else {
+            errorBox.props.class = "";
           }
         },
       },
     });
+
+    this.children.errorBox = new ErrorBox();
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
@@ -46,19 +55,14 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
   public isFieldOk(value: string): boolean | undefined {
     if (!this.props.funcValid) return undefined;
 
-    const classElement = this.element!.getAttribute("class");
+    const error = this.children.errorBox as ErrorBox;
 
     if (this.props.funcValid(value)) {
-      this.element!.querySelector<HTMLElement>(
-        `.${classElement}__error`
-      )!.style.display = "none";
+      error.props.value = "";
       return true;
     }
 
-    this.element!.querySelector<HTMLElement>(
-      `.${classElement}__error`
-    )!.style.display = "block";
-
+    error.props.value = this.props.error;
     return false;
   }
 

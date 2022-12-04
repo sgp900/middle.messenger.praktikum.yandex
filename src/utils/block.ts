@@ -87,6 +87,20 @@ export class Block<P extends Record<string, any> = any> {
     });
   }
 
+  private _removeEvents() {
+    const { events = {} } = this.props as P & {
+      events: Record<string, () => void>;
+    };
+
+    if (!events) {
+      return;
+    }
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
   private _registerEvents(eventBus: EventBus<BlockEvents>) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -152,6 +166,8 @@ export class Block<P extends Record<string, any> = any> {
 
   private _render() {
     const fragment = this.render();
+
+    this._removeEvents();
 
     const newElement = fragment.firstElementChild as HTMLElement;
 
