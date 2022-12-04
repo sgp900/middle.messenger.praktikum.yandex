@@ -1,0 +1,7 @@
+.profile-listitem {
+  &__error {
+    color: var(--clr-error);
+    flex-basis: 100%;
+    font-size: 0.7rem;
+  }
+}
