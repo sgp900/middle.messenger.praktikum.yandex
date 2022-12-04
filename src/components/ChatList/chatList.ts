@@ -1,9 +1,9 @@
-import Block from "../../utils/block";
+import { Block } from "../../utils/block";
 import { Chat, ChatProps } from "../Chat/chat";
-import SearchInput from "../SearchInput/searchInput";
-import Button from "../Button/button";
+import { SearchInput } from "../SearchInput/searchInput";
+import { Button } from "../Button/button";
 
-import renderPage from "../../utils/render";
+import { renderPage } from "../../utils/render";
 
 import template from "./template.hbs";
 import styles from "./style.scss";
@@ -12,7 +12,7 @@ interface ChatsListProps {
   chats: ChatProps[];
 }
 
-export default class ChatList extends Block<ChatsListProps> {
+export class ChatList extends Block<ChatsListProps> {
   protected init() {
     this.children.chats = ChatList.createChats(this.props.chats);
     this.children.searchInput = new SearchInput({
@@ -35,6 +35,6 @@ export default class ChatList extends Block<ChatsListProps> {
   }
 
   private static createChats(chats: ChatProps[]) {
-    return chats.map((data) => new Chat({ ...data }));
+    return chats.map((data) => new Chat(data));
   }
 }

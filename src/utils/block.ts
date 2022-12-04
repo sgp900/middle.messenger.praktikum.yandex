@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import EventBus from "./eventBus";
+import { EventBus } from "./eventBus";
 
 type BlockEvents<P = any> = {
   init: [];
@@ -10,11 +10,10 @@ type BlockEvents<P = any> = {
 };
 
 type Props<P extends Record<string, any> = any> = {
-  // eslint-disable-next-line no-unused-vars
   events?: Record<string, (e?: Event) => void>;
 } & P;
 
-export default class Block<P extends Record<string, any> = any> {
+export class Block<P extends Record<string, any> = any> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -50,8 +49,7 @@ export default class Block<P extends Record<string, any> = any> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  _getChildrenAndProps(childrenAndProps: Props<P>): {
+  private _getChildrenAndProps(childrenAndProps: Props<P>): {
     props: Props<P>;
     children: Record<string, Block | Block[]>;
   } {
@@ -60,9 +58,9 @@ export default class Block<P extends Record<string, any> = any> {
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
       if (
-        Array.isArray(value)
-        && value.length > 0
-        && value.every((v) => v instanceof Block)
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value.every((v) => v instanceof Block)
       ) {
         children[key as string] = value;
       } else if (value instanceof Block) {
@@ -75,7 +73,7 @@ export default class Block<P extends Record<string, any> = any> {
     return { props: props as Props<P>, children };
   }
 
-  _addEvents() {
+  private _addEvents() {
     const { events = {} } = this.props as P & {
       events: Record<string, () => void>;
     };
@@ -89,7 +87,21 @@ export default class Block<P extends Record<string, any> = any> {
     });
   }
 
-  _registerEvents(eventBus: EventBus<BlockEvents>) {
+  private _removeEvents() {
+    const { events = {} } = this.props as P & {
+      events: Record<string, () => void>;
+    };
+
+    if (!events) {
+      return;
+    }
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
+  private _registerEvents(eventBus: EventBus<BlockEvents>) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -102,15 +114,13 @@ export default class Block<P extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected init() { }
+  protected init() {}
 
   private _componentDidMount() {
     this.componentDidMount();
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected componentDidMount() { }
+  protected componentDidMount() {}
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -125,20 +135,19 @@ export default class Block<P extends Record<string, any> = any> {
     });
   }
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  _componentWasUpdate() {
+  private _componentWasUpdate() {
     this.componentWasUpdate();
   }
 
-  // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  protected componentWasUpdate() { }
+  protected componentWasUpdate() {}
 
-  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -156,14 +165,13 @@ export default class Block<P extends Record<string, any> = any> {
   }
 
   private _render() {
-    // debugger;
     const fragment = this.render();
+
+    this._removeEvents();
 
     const newElement = fragment.firstElementChild as HTMLElement;
 
-    // if (this._element !== null) {
     this._element?.replaceWith(newElement);
-    // }
 
     this._element = newElement;
 
@@ -176,12 +184,10 @@ export default class Block<P extends Record<string, any> = any> {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected render(): DocumentFragment {
     return new DocumentFragment();
   }
 
-  // eslint-disable-next-line no-unused-vars
   protected compile(template: (context: any) => string, context: any) {
     const contextAndStubs = { ...context };
 
@@ -204,7 +210,7 @@ export default class Block<P extends Record<string, any> = any> {
 
     const replaceStub = (component: Block) => {
       const stub = fragment.content.querySelector(
-        `[data-id="${component.id}"]`,
+        `[data-id="${component.id}"]`
       );
 
       if (!stub) {
@@ -230,7 +236,7 @@ export default class Block<P extends Record<string, any> = any> {
     return this._element;
   }
 
-  _makePropsProxy(props: any) {
+  private _makePropsProxy(props: any) {
     const self = this;
 
     return new Proxy(props, {
@@ -241,7 +247,6 @@ export default class Block<P extends Record<string, any> = any> {
       set(target, prop, value) {
         const oldTarget = { ...target };
 
-        // eslint-disable-next-line no-param-reassign
         target[prop] = value;
 
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
@@ -253,8 +258,7 @@ export default class Block<P extends Record<string, any> = any> {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  _createDocumentElement(tagName: string) {
+  private _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 

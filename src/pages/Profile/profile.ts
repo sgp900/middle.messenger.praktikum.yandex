@@ -1,4 +1,4 @@
-import Block from "../../utils/block";
+import { Block } from "../../utils/block";
 
 import styles from "./style.scss";
 import template from "./template.hbs";
@@ -18,13 +18,11 @@ interface ProfileProps {
   inputData?: Array<Record<string, string | unknown>>;
 }
 
-export default class Profile extends Block<ProfileProps> {
+export class Profile extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
     if (!props.avatar) {
-      // eslint-disable-next-line no-param-reassign
       props.avatar = defaultAvatar;
     }
-    // eslint-disable-next-line no-param-reassign
     props.inputData = [
       {
         name: "email",
