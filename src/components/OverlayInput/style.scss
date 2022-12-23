@@ -22,21 +22,44 @@
 
   label {
     display: inline-block;
-    margin-bottom: 2.8125rem;
     font-size: 0.75rem;
     color: var(--clr-link);
     cursor: pointer;
   }
 
+  &__input {
+    height: 1.75rem;
+  }
+
   input[type="file"] {
     display: none;
   }
-}
 
-.hide {
-  display: none;
-}
+  &__buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
 
-.file__overlay label {
-  max-width: 7.62rem;
+    .button {
+      flex: 0 50%;
+      box-sizing: border-box;
+    }
+
+    .btn--white {
+      background-color: white;
+      color: var(--clr-bg-button);
+      border: 2px solid var(--clr-bg-button);
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  &__error {
+    color: var(--clr-red);
+    margin-bottom: 2.8rem;
+  }
 }

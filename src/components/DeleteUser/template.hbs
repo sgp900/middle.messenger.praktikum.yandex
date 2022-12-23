@@ -1,0 +1,18 @@
+<div class="overlay del-user">
+  <div class="overlay-wrapper">
+    <h4 class="overlay__caption">Удалить пользователи из чата</h4>
+    <div class="overlay__wrap">
+      {{#if userList}}
+        {{#each userList}}
+          {{{this}}}
+        {{/each}}
+      {{else}}
+        <span class="overlay__nousers">Вы один в чате</span>
+      {{/if}}
+      <div class="overlay__error">{{error}}</div>
+    </div>
+    <div class="overlay__buttons">
+      {{{buttonEsc}}}
+    </div>
+  </div>
+</div>

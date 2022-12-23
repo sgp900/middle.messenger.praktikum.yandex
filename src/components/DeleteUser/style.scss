@@ -1,0 +1,71 @@
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 9000;
+  background-color: rgba(#000, $alpha: 0.7);
+  display: flex;
+
+  &-wrapper {
+    margin: auto;
+    text-align: center;
+    padding: 2.5rem 1.875rem;
+    background-color: var(--clr-white);
+    border-radius: 12px;
+    width: 21.25rem;
+  }
+
+  &__caption {
+    font-size: 0.9375rem;
+    margin-bottom: 2.6875rem;
+  }
+
+  label {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--clr-link);
+    cursor: pointer;
+  }
+
+  &__input {
+    height: 1.75rem;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+
+    .button {
+      flex: 1;
+      box-sizing: border-box;
+    }
+
+    .btn--white {
+      background-color: white;
+      color: var(--clr-bg-button);
+      border: 2px solid var(--clr-bg-button);
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 1.25rem;
+  }
+
+  &__error {
+    color: var(--clr-red);
+    margin-bottom: 2.8rem;
+  }
+
+  &__nousers {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}

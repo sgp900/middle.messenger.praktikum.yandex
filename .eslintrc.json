@@ -4,6 +4,8 @@
   "plugins": ["@typescript-eslint"],
   "env": { "browser": true },
   "rules": {
+    "no-continue": "off",
+    "default-case": "off",
     "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
     "operator-linebreak": "off",
