@@ -1,14 +1,6 @@
 import { nanoid } from "nanoid";
 import { EventBus } from "./eventBus";
 
-type BlockEvents<P = any> = {
-  init: [];
-  "flow:component-did-mount": [];
-  "flow:component-did-update": [P, P];
-  "flow:component-was-update": [];
-  "flow:render": [];
-};
-
 type Props<P extends Record<string, any> = any> = {
   events?: Record<string, (e?: Event) => void>;
 } & P;
@@ -19,7 +11,7 @@ export class Block<P extends Record<string, any> = any> {
     FLOW_CDM: "flow:component-did-mount",
     FLOW_RENDER: "flow:render",
     FLOW_CDU: "flow:component-did-update",
-    FLOW_CWU: "flow:component-was-update",
+    FLOW_CUM: "flow:component-unmount",
   } as const;
 
   public id = nanoid(6);
@@ -29,14 +21,12 @@ export class Block<P extends Record<string, any> = any> {
   // eslint-disable-next-line no-use-before-define
   public children: Record<string, Block | Block[]> = {};
 
-  private eventBus: () => EventBus<BlockEvents<Props<P>>>;
+  private eventBus: () => EventBus;
 
   private _element: HTMLElement | null = null;
 
-  private first: boolean = true;
-
   constructor(propsAndChildren: Props<P> = {} as Props<P>) {
-    const eventBus = new EventBus<BlockEvents<Props<P>>>();
+    const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsAndChildren);
 
@@ -101,12 +91,12 @@ export class Block<P extends Record<string, any> = any> {
     });
   }
 
-  private _registerEvents(eventBus: EventBus<BlockEvents>) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWasUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CUM, this._componentWillUnmount.bind(this));
   }
 
   private _init() {
@@ -141,11 +131,25 @@ export class Block<P extends Record<string, any> = any> {
     }
   }
 
-  private _componentWasUpdate() {
-    this.componentWasUpdate();
+  private _componentWillUnmount() {
+    this.componentWillUnmount();
   }
 
-  protected componentWasUpdate() {}
+  protected componentWillUnmount() {}
+
+  public dispatchComponentWillUnmount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CUM);
+
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((chi) => {
+          chi.dispatchComponentWillUnmount();
+        });
+      } else {
+        child.dispatchComponentWillUnmount();
+      }
+    });
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: P, newProps: P) {
@@ -160,7 +164,7 @@ export class Block<P extends Record<string, any> = any> {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  public get element() {
     return this._element;
   }
 
@@ -176,12 +180,6 @@ export class Block<P extends Record<string, any> = any> {
     this._element = newElement;
 
     this._addEvents();
-
-    if (this.first) {
-      this.first = false;
-    } else {
-      this.eventBus().emit(Block.EVENTS.FLOW_CWU);
-    }
   }
 
   protected render(): DocumentFragment {

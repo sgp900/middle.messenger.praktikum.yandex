@@ -1,1 +1,7 @@
-<div class="message {{#if your}}message-your {{/if}}">{{{text}}}</div>
+{{#if isMine}}
+  <div class="message message-your">
+  {{else}}
+  <div class="message">
+{{/if}}
+<div class="message__meta">{{#unless isMine}}{{user_name}}{{/unless}}<span class="message__time">{{time}}</span></div>
+{{{content}}}</div>

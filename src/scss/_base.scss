@@ -57,6 +57,40 @@ button {
   cursor: pointer;
 }
 
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 9000;
+  background-color: rgba(#000, $alpha: 0.7);
+  display: flex;
+  top: 0;
+  left: 0;
+
+  &-wrapper {
+    margin: auto;
+    text-align: center;
+    padding: 2.5rem 1.875rem;
+    background-color: var(--clr-white);
+    border-radius: 12px;
+    width: 21.25rem;
+  }
+
+  &__caption {
+    font-size: 0.9375rem;
+    margin-bottom: 2.6875rem;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+}
+
 .hide {
+  display: none;
   visibility: hidden;
+}
+
+.file__overlay label {
+  max-width: 7.62rem;
 }

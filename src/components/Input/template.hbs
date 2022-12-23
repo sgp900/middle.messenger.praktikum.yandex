@@ -1,8 +1,9 @@
 <input
   class="{{class}}"
+  type="{{type}}"
   name="{{name}}"
-  id="{{name}}"
-  type="text"
-  placeholder="{{{placeholder}}}"
-  value="{{data}}"
+  id="{{#if id}}{{id}}{{else}}{{name}}{{/if}}"
+  {{#if placeholder}}placeholder="{{{placeholder}}}" {{/if}}
+  {{#if data}} value="{{data}}"{{/if}}
+  {{#if accept}} accept="{{accept}}" {{/if}}
 />

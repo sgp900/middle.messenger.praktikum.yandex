@@ -1,0 +1,19 @@
+.deluser {
+  display: flex;
+
+  &__title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    color: var(--clr-black);
+    font-size: 0.85rem;
+    overflow: hidden;
+  }
+
+  &__btn {
+    .button {
+      width: fit-content;
+      padding-inline: 1rem;
+    }
+  }
+}
