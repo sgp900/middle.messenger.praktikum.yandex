@@ -11,19 +11,19 @@ export class UserAPI extends BaseAPI {
   }
 
   profile(data: User) {
-    return this.http.put("/profile", data);
+    return this.http.put("/profile", { data });
   }
 
   password(oldPassword: string, newPassword: string) {
-    return this.http.put("/password", { oldPassword, newPassword });
+    return this.http.put("/password", { data: { oldPassword, newPassword } });
   }
 
   avatar(file: FormData): Promise<User> {
-    return this.http.put("/profile/avatar", file);
+    return this.http.put("/profile/avatar", { data: file });
   }
 
   search(login: string): Promise<User[]> {
-    return this.http.post("/search", { login });
+    return this.http.post("/search", { data: { login } });
   }
 
   create = undefined;

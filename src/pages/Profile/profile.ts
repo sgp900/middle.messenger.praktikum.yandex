@@ -7,7 +7,7 @@ import { Link } from "../../components/Link/link";
 import AuthController from "../../controllers/AuthController";
 import { withStore } from "../../hocs/withStore";
 import router from "../../utils/router";
-import { AvatarComponent } from "../../components/Avatar/avatar";
+import { UserAvatarComponent } from "../../components/UserAvatar/userAvatar";
 import { Button } from "../../components/Button/button";
 
 interface ProfileProps {
@@ -24,7 +24,7 @@ interface ProfileProps {
 
 class Profile extends Block<ProfileProps> {
   protected init() {
-    this.children.avatar = new AvatarComponent({});
+    this.children.avatar = new UserAvatarComponent({});
 
     this.children.buttonBack = new Button({
       class: "profile__btn-back",

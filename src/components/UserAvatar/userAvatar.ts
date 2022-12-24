@@ -8,19 +8,40 @@ import styles from "./style.scss";
 import defaultAvatar from "../../../img/avatar.svg";
 import { Button } from "../Button/button";
 
+import UserController from "../../controllers/UserController";
+import { Input } from "../Input/input";
+
 interface AvatarProps {
   avatar: string;
   avatarSrc: string;
   avatarIsLoading: boolean;
 }
 
-export class Avatar extends Block<AvatarProps> {
+export class UserAvatar extends Block<AvatarProps> {
   protected init(): void {
     if (this.props.avatar) {
       ResourcesController.getAvatar(this.props.avatar as string);
     }
 
-    this.children.FileLoad = new FileLoad();
+    this.children.FileLoad = new FileLoad({
+      btnProp: {
+        click(this: FileLoad) {
+          const File = this.children.fileInput as Input;
+          const blobFile = File.element as HTMLInputElement;
+
+          if (blobFile.files?.length) {
+            const formData = new FormData();
+            formData.append("avatar", blobFile.files[0]);
+            UserController.avatar(formData);
+            this.props.error = "";
+            this.hide();
+          } else {
+            this.props.error = "Файл не выбран";
+          }
+        },
+      },
+    });
+
     this.children.FileLoad.hide();
 
     this.children.button = new Button({
@@ -56,4 +77,4 @@ function mapStateToProps(state: any): AvatarProps | {} {
   };
 }
 
-export const AvatarComponent = withStore(mapStateToProps)(Avatar);
+export const UserAvatarComponent = withStore(mapStateToProps)(UserAvatar);

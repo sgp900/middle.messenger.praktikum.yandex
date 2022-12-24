@@ -25,6 +25,7 @@ export interface MessageProps {
 export interface ChatsResponse {
   id: number;
   avatar: string;
+  avatarSrc: string;
   title: string;
   time?: number | string;
   last_message: MessageProps;
@@ -51,4 +52,12 @@ export interface GetChatsData {
   offset?: number;
   limit?: number;
   title?: string;
+}
+
+export interface ServerWSResponse {
+  id: string;
+  time: string;
+  user_id: string;
+  content: string;
+  type: string;
 }

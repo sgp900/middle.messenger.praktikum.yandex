@@ -49,12 +49,21 @@ export class WSTransport extends EventBus {
 
   private subscribe(socket: WebSocket) {
     socket.addEventListener("message", (message) => {
-      const data = JSON.parse(message.data);
+      let data: any = "";
+
+      try {
+        data = JSON.parse(message.data);
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          throw new Error(e.message);
+        } else {
+          throw new Error("Cant parse JSON data");
+        }
+      }
 
       if (data?.type === "pong") {
         return;
       }
-
       this.emit(SocketEvent.Message, data);
     });
 
