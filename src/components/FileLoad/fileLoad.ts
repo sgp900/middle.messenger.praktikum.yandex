@@ -4,18 +4,21 @@ import template from "./template.hbs";
 import styles from "./style.scss";
 import { Button } from "../Button/button";
 import { Input } from "../Input/input";
-import UserController from "../../controllers/UserController";
 
 export interface FileLoadProps {
   label?: string;
   class?: string;
   type?: string;
-  error: string;
-  events?: Record<string, () => void>;
+  error?: string;
+  btnProp: {
+    click: () => void;
+  };
 }
 
 export class FileLoad extends Block<FileLoadProps> {
   protected init(): void {
+    const btnClick = this.props.btnProp.click.bind(this);
+
     this.children.fileInput = new Input({
       name: "avatar",
       type: "file",
@@ -26,20 +29,7 @@ export class FileLoad extends Block<FileLoadProps> {
     this.children.buttonOk = new Button({
       label: "Поменять",
       events: {
-        click: () => {
-          this.hide();
-
-          const File = this.children.fileInput as Input;
-          const blobFile = File.element as HTMLInputElement;
-
-          if (blobFile.files?.length) {
-            const formData = new FormData();
-            formData.append("avatar", blobFile.files[0]);
-            UserController.avatar(formData);
-          } else {
-            this.props.error = "Файл не выбран";
-          }
-        },
+        click: btnClick,
       },
     });
 

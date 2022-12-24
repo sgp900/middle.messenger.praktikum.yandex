@@ -10,7 +10,7 @@ import {
   ProfileField,
   ProfileFieldProps,
 } from "../../components/ProfileField/profileField";
-import { AvatarComponent } from "../../components/Avatar/avatar";
+import { UserAvatarComponent } from "../../components/UserAvatar/userAvatar";
 import router from "../../utils/router";
 import { User } from "../../interfaces/interface";
 
@@ -32,7 +32,7 @@ export class ProfileEdit extends Block<ProfileEditProps> {
       },
     });
 
-    this.children.avatar = new AvatarComponent({});
+    this.children.avatar = new UserAvatarComponent({});
 
     this.props.events = { submit: this.handleSubmit.bind(this) };
 

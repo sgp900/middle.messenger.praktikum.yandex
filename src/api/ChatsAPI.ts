@@ -11,24 +11,32 @@ export class ChatsAPI extends BaseAPI {
   }
 
   getToken(id: number): Promise<Record<string, string>> {
-    return this.http.post(`/token/${id}`, { id });
+    return this.http.post(`/token/${id}`, { data: { id } });
   }
 
   create(title: string) {
-    return this.http.post("/", { title });
+    return this.http.post("/", { data: { title } });
+  }
+
+  delete(chatId: string) {
+    return this.http.delete("/", { data: { chatId } });
   }
 
   addUserToChat(idUser: number, chatId: number) {
     return this.http.put("/users", {
-      users: [idUser],
-      chatId,
+      data: {
+        users: [idUser],
+        chatId,
+      },
     });
   }
 
   deleteUserFromChat(idUser: number, chatId: number) {
     return this.http.delete("/users", {
-      users: [idUser],
-      chatId,
+      data: {
+        users: [idUser],
+        chatId,
+      },
     });
   }
 
@@ -36,7 +44,9 @@ export class ChatsAPI extends BaseAPI {
     return this.http.get(`/${idChat}/users`);
   }
 
-  update = undefined;
+  setAvatar(avatar: FormData) {
+    return this.http.put("/avatar", { data: avatar });
+  }
 
-  delete = undefined;
+  update = undefined;
 }

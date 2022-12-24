@@ -1,15 +1,22 @@
-export enum Method {
-  Get = "Get",
-  Post = "Post",
-  Put = "Put",
-  Patch = "Patch",
-  Delete = "Delete",
+const enum METHODS {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
 }
 
 type Options = {
-  method: Method;
-  data?: any;
+  method?: METHODS;
+  headers?: Record<string, string>;
+  data?: Object;
+  timeout?: number;
 };
+
+type HTTPMethod = <Response = void>(
+  url: string,
+  options?: Options
+) => Promise<Response>;
 
 class HTTPTransport {
   static API_URL = "https://ya-praktikum.tech/api/v2";
@@ -20,59 +27,39 @@ class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  public get<Response>(path = "/"): Promise<Response> {
-    console.log(this.endpoint + path);
+  public get: HTTPMethod = (path = "/") => this.request(this.endpoint + path);
 
-    return this.request<Response>(this.endpoint + path);
-  }
-
-  public post<Response = void>(
-    path: string,
-    data?: unknown
-  ): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
-      method: Method.Post,
-      data,
+  public post: HTTPMethod = (path, options = { method: METHODS.POST }) =>
+    this.request(this.endpoint + path, {
+      ...options,
+      method: METHODS.POST,
     });
-  }
 
-  public put<Response = void>(path: string, data: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
-      method: Method.Put,
-      data,
+  public put: HTTPMethod = (path, options = { method: METHODS.PUT }) =>
+    this.request(this.endpoint + path, {
+      ...options,
+      method: METHODS.PUT,
     });
-  }
 
-  public patch<Response = void>(
-    path: string,
-    data: unknown
-  ): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
-      method: Method.Patch,
-      data,
+  public patch: HTTPMethod = (path, options = { method: METHODS.PATCH }) =>
+    this.request(this.endpoint + path, {
+      ...options,
+      method: METHODS.PATCH,
     });
-  }
 
-  public delete<Response = void>(
-    path: string,
-    data: unknown
-  ): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
-      method: Method.Delete,
-      data,
+  public delete: HTTPMethod = (path, options = { method: METHODS.DELETE }) =>
+    this.request(this.endpoint + path, {
+      ...options,
+      method: METHODS.DELETE,
     });
-  }
 
-  private request<Response>(
-    url: string,
-    options: Options = { method: Method.Get }
-  ): Promise<Response> {
+  private request: HTTPMethod = (url, options = { method: METHODS.GET }) => {
     const { method } = options;
     let { data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+      xhr.open(method as METHODS, url);
 
       xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -88,11 +75,17 @@ class HTTPTransport {
       xhr.onerror = () => reject(new Error("network error"));
       xhr.ontimeout = () => reject(new Error("timeout"));
 
+      let sendData: FormData | string;
+
       if (!(data instanceof FormData)) {
         xhr.setRequestHeader("Content-Type", "application/json");
-        data = JSON.stringify(data);
+        data = JSON.stringify(data) as string;
+        sendData = data as string;
+      } else {
+        sendData = data as FormData;
       }
-      if (method === Method.Get && url.match(/(.png|.jpg)$/)) {
+
+      if (method === METHODS.GET && url.match(/(.png|.jpg)$/)) {
         xhr.responseType = "blob";
       } else {
         xhr.responseType = "json";
@@ -100,13 +93,13 @@ class HTTPTransport {
 
       xhr.withCredentials = true;
 
-      if (method === Method.Get || !data) {
+      if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(sendData);
       }
     });
-  }
+  };
 }
 
 export { HTTPTransport };

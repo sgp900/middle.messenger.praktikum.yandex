@@ -3,6 +3,7 @@ import { User } from "../interfaces/interface";
 import store from "../utils/store";
 import messagesController from "./MessagesController";
 import UserController from "./UserController";
+import { ResourcesAPI } from "../api/ResourcesAPI";
 
 class ChatsController {
   private readonly api = new ChatsAPI();
@@ -10,6 +11,19 @@ class ChatsController {
   async create(title: string) {
     await this.api.create(title);
 
+    await this.fetchChats();
+  }
+
+  async delete(chatId: number) {
+    await this.api.delete(String(chatId));
+
+    store.set("currentChat", undefined);
+
+    await this.fetchChats();
+  }
+
+  async setAvatar(avatar: FormData) {
+    await this.api.setAvatar(avatar);
     await this.fetchChats();
   }
 
@@ -21,6 +35,7 @@ class ChatsController {
     await Promise.all(chats.map((chat) => messagesController.connect(chat.id)));
 
     const users: User[][] = [];
+    const chatAPI = new ResourcesAPI();
 
     await Promise.all(
       chats.map(async (chat) => {
@@ -29,6 +44,11 @@ class ChatsController {
         allUser = allUser.filter((user) => user.id !== currentUsrId);
 
         users[chat.id] = allUser;
+
+        if (chat.avatar) {
+          const res = (await chatAPI.read(chat.avatar)) as Blob;
+          chat.avatarSrc = URL.createObjectURL(res);
+        }
       })
     );
 

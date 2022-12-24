@@ -21,12 +21,13 @@ import ChatsController from "../../controllers/ChatsController";
 import { PlaceHolderInput } from "../PlaceHolderInput/placeHolderInput";
 import store from "../../utils/store";
 import { DeleteUser } from "../DeleteUser/deleteUser";
-import { Link } from "../Link/link";
+import { ChatAvatar } from "../ChatAvatar/chatAvatar";
 
 export interface CurrentChatProps {
   selectedChats?: number;
   title: string;
   messages: MessageProps[];
+  avatar: string;
   imgs?: Record<string, string>;
   events?: Record<string, (e?: Event) => void>;
   userID: string;
@@ -47,16 +48,6 @@ class CurrentChat extends Block<CurrentChatProps> {
 
   protected init() {
     this.props.events = { submit: this.handleSubmit.bind(this) };
-
-    this.children.linkNotFound = new Link({
-      href: "/404",
-      label: "Нашу фирменную 404-ю страницу",
-    });
-
-    this.children.link500 = new Link({
-      href: "/500",
-      label: "Нашу незабываемую страницу с кодом 500",
-    });
 
     this.children.newMsgInput = new Input({
       name: "message",
@@ -127,6 +118,9 @@ class CurrentChat extends Block<CurrentChatProps> {
     newProps: CurrentChatProps
   ): boolean {
     if (!newProps.selectedChats) {
+      if (!oldProps.selectedChats) {
+        return true;
+      }
       return false;
     }
 
@@ -150,6 +144,21 @@ class CurrentChat extends Block<CurrentChatProps> {
     if (this.props.messages && this.props.messages.length) {
       this.children.messages = CurrentChat.createMessages(this.props);
     }
+
+    this.children.delChatBtn = new ButtonIcon({
+      class:
+        "btn-drop__drop-icon currentchat-action__icon currentchat-action__icon_del",
+      label: "Удалить чат",
+      events: {
+        click: () => {
+          if (this.props.selectedChats) {
+            ChatsController.delete(this.props.selectedChats);
+          }
+        },
+      },
+    });
+
+    this.children.avatarImg = new ChatAvatar({ avatar: this.props.avatar });
 
     return true;
   }
@@ -196,10 +205,12 @@ class CurrentChat extends Block<CurrentChatProps> {
   }
 }
 
-function getChatTitle(id: number, chats: ChatsResponse[]): string {
+function getChatById(
+  id: number,
+  chats: ChatsResponse[]
+): ChatsResponse | undefined {
   const chat = chats.find((item) => item.id === id);
-
-  return chat!.title;
+  return chat;
 }
 
 export const CurrentChatComponent = withStore((state: any) => {
@@ -213,9 +224,12 @@ export const CurrentChatComponent = withStore((state: any) => {
     };
   }
 
+  const chat = getChatById(selectedChatId, state.chats.data);
+
   return {
-    title: getChatTitle(selectedChatId, state.chats.data),
+    title: chat?.title,
     messages: (state.messages || {})[selectedChatId] || [],
+    avatar: chat?.avatarSrc,
     selectedChats: state.currentChat,
     userID: state.user.data.id,
     usersCurentChat: state.chats.users[selectedChatId],
