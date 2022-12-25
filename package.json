@@ -9,7 +9,7 @@
     "build": "parcel build ./src/index.html --dist-dir ./dist",
     "start": "npm run build && node ./server.js"
   },
-  "author": "",
+  "author": "test",
   "license": "MIT",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
