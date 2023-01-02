@@ -7,6 +7,7 @@ export interface ButtonProps {
   label?: string;
   class?: string;
   type?: string;
+  arrowBack?: boolean;
   events?: Record<string, () => void>;
 }
 

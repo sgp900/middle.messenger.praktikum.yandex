@@ -1,7 +1,13 @@
-<div class="overlay {{class}} hide">
+<div class="overlay {{class}}">
   <div class="overlay-wrapper">
     <h4 class="overlay__caption">{{caption}}</h4>
-    {{{input}}}
-    {{{btn}}}
+    <div class="overlay__wrap">
+      {{{input}}}
+      <div class="overlay__error">{{error}}</div>
+    </div>
+    <div class="overlay__buttons">
+      {{{buttonEsc}}}
+      {{{buttonOk}}}
+    </div>
   </div>
 </div>

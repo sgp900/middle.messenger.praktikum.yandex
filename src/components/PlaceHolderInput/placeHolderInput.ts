@@ -20,6 +20,7 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
   protected init(): void {
     this.children.input = new Input({
       name: this.props.name,
+      type: this.props.type,
       class: "placeHolderInput__input",
       placeholder: "&nbsp;",
       data: this.props.value,
@@ -46,6 +47,16 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
     });
 
     this.children.errorBox = new ErrorBox();
+  }
+
+  public getValue() {
+    const input = this.children.input as Input;
+    return (input.element as HTMLInputElement).value;
+  }
+
+  public setValue(val: string) {
+    const input = this.children.input as Input;
+    (input.element as HTMLInputElement).value = val;
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {

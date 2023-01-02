@@ -1,0 +1,12 @@
+<div class="profile__avatar-block">
+  {{{FileLoad}}}
+  <div class="profile__avatar">
+    {{#unless avatarIsLoading}}
+      <img src="{{avatarSrc}}" alt="аватар пользователя" />
+    {{/unless}}
+    {{{button}}}
+  </div>
+  {{#if name}}
+    <h1>{{name}}</h1>
+  {{/if}}
+</div>

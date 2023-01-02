@@ -14,11 +14,33 @@
   }
 }
 
-.channels-search {
-  margin-top: 1.5rem;
+.channels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &-search {
+    margin-top: 1.5rem;
+  }
+
+  &__list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.875rem;
+    border-top: 1px solid var(--clr-border);
+
+    .addBtn {
+      margin-top: auto;
+      background: var(--clr-bg-search-input);
+      color: var(--clr-chat-text);
+      margin-bottom: 12px;
+    }
+  }
 }
 
-.channels__list {
-  margin-top: 0.875rem;
-  border-top: 1px solid var(--clr-border);
+.left-side__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

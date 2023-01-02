@@ -1,0 +1,32 @@
+.file__overlay label {
+  max-width: 7.62rem;
+  display: inline-block;
+  margin-bottom: 0.8125rem;
+  font-size: 0.75rem;
+  color: var(--clr-link);
+  cursor: pointer;
+}
+
+.fileLoad {
+  &__buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+
+    .button {
+      flex: 0 50%;
+      box-sizing: border-box;
+    }
+
+    .btn--white {
+      background-color: white;
+      color: var(--clr-bg-button);
+      border: 2px solid var(--clr-bg-button);
+    }
+  }
+
+  &__error {
+    color: var(--clr-red);
+    margin-bottom: 2.8rem;
+  }
+}

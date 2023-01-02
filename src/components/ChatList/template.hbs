@@ -1,4 +1,5 @@
-<div>
+<div class="left-side__wrapper">
+  {{{addChat}}}
   <div class="show-profile">
     {{{showProfileBtn}}}
   </div>
@@ -7,9 +8,10 @@
       {{{searchInput}}}
     </div>
     <ul class="channels__list" role="list">
-      {{#each chats}}
+      {{#each chatsChild}}
         {{{this}}}
       {{/each}}
+      {{{addChatBtn}}}
     </ul>
   </aside>
 </div>

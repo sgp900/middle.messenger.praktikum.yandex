@@ -1,115 +1,88 @@
 <div class="currentchat">
-  <div class="currentchat-head">
-    <div class="currentchat-head__user">
-      <div class="currentchat-head__user-avatar"></div>
-      <p class="currentchat-head__user-name">{{label}}</p>
-    </div>
-
-    <div class="btn-drop__wrapper">
-      <button class="btn-drop__btn currentchat-head__btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="btn-drop__drop currentchat-action">
-        <div class="btn-drop__drop-wrapper">
-          <ul class="btn-drop__drop-list" role="list">
-            <li class="btn-drop__item">
-              <button
-                onclick="let overlay = document.querySelector('.overlay.add-user');
-                 overlay.classList.toggle('hide');"
-              >
-                <div
-                  class="
-                    btn-drop__drop-icon
-                    currentchat-action__icon currentchat-action__icon_add
-                  "
-                ></div>
-                <p>Добавить пользователя</p>
-              </button>
-            </li>
-            <li class="btn-drop__item currentchat-action__item">
-              <button
-                onclick="let overlay = document.querySelector('.overlay.del-user');
-                 overlay.classList.toggle('hide');"
-              >
-                <div
-                  class="
-                    btn-drop__drop-icon
-                    currentchat-action__icon currentchat-action__icon_delete
-                  "
-                ></div>
-                <p>Удалить пользователя</p>
-              </button>
-            </li>
-          </ul>
+  {{#if selectedChats}}
+    {{{overlayDelUser}}}
+    {{{overlayAddUser}}}
+    <div class="currentchat-head">
+      <div class="currentchat-head__user">
+        <div class="currentchat-head__user-avatar">
+          {{{avatarImg}}}
         </div>
+        <p class="currentchat-head__user-name">{{title}}</p>
       </div>
-    </div>
-  </div>
-  {{#if selectedChat}}
-  <div class="currentchat-msgs">{{#each messages}} {{{this}}} {{/each}}</div>
-  <form action="#">
-    <div class="currentchat-newmsg">
+
       <div class="btn-drop__wrapper">
-        <button class="btn-drop__btn currentchat-newmsg__btn">
-          <img src="{{imgs.clip}}" alt="Прикрепить файл" />
+        <button class="btn-drop__btn currentchat-head__btn">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
-        <div class="btn-drop__drop">
+        <div class="btn-drop__drop currentchat-action">
           <div class="btn-drop__drop-wrapper">
             <ul class="btn-drop__drop-list" role="list">
               <li class="btn-drop__item">
-                <button>
-                  <div class="btn-drop__drop-icon">
-                    <img
-                      src="{{imgs.iconPhotoVideo}}"
-                      alt="Добавить фото или видео"
-                    />
-                  </div>
-                  <p>Фото или Видео</p>
-                </button>
+                {{{addUserBtn}}}
               </li>
-              <li class="btn-drop__item">
-                <button>
-                  <div class="btn-drop__drop-icon">
-                    <img src="{{imgs.iconFile}}" alt="Добавить файл" />
-                  </div>
-                  <p>Файл</p>
-                </button>
+              <li class="btn-drop__item currentchat-action__item">
+                {{{delUserBtn}}}
               </li>
-              <li class="btn-drop__item">
-                <button>
-                  <div class="btn-drop__drop-icon">
-                    <img src="{{imgs.iconLocation}}" alt="Добавить локацию" />
-                  </div>
-                  <p>Локация</p>
-                </button>
+              <li class="btn-drop__item currentchat-action__item">
+                {{{delChatBtn}}}
               </li>
             </ul>
           </div>
         </div>
       </div>
-      {{{newMsgInput}}} {{{sendBtn}}}
     </div>
-  </form>
+    <div class="currentchat-msgs">{{#each messages}} {{{this}}} {{/each}}</div>
+    <form action="#">
+      <div class="currentchat-newmsg">
+        <div class="btn-drop__wrapper">
+          <button class="btn-drop__btn currentchat-newmsg__btn">
+            <img src="{{imgs.clip}}" alt="Прикрепить файл" />
+          </button>
+          <div class="btn-drop__drop">
+            <div class="btn-drop__drop-wrapper">
+              <ul class="btn-drop__drop-list" role="list">
+                <li class="btn-drop__item">
+                  <button>
+                    <div class="btn-drop__drop-icon">
+                      <img
+                        src="{{imgs.iconPhotoVideo}}"
+                        alt="Добавить фото или видео"
+                      />
+                    </div>
+                    <p>Фото или Видео</p>
+                  </button>
+                </li>
+                <li class="btn-drop__item">
+                  <button>
+                    <div class="btn-drop__drop-icon">
+                      <img src="{{imgs.iconFile}}" alt="Добавить файл" />
+                    </div>
+                    <p>Файл</p>
+                  </button>
+                </li>
+                <li class="btn-drop__item">
+                  <button>
+                    <div class="btn-drop__drop-icon">
+                      <img src="{{imgs.iconLocation}}" alt="Добавить локацию" />
+                    </div>
+                    <p>Локация</p>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {{{newMsgInput}}}
+        {{{sendBtn}}}
+      </div>
+    </form>
   {{else}}
-  <div class="currentchat__msg currentchat__empty">
-    <nav>
-      <p>Выберите чат чтобы отправить сообщение</p>
-      <p>Или посетите:</p>
-      <ul role="list">
-        <li>
-          <a onclick="renderPage('pagenotfound')" href="#"
-            >Нашу фирменную 404-ю страницу</a
-          >
-        </li>
-        <li>
-          <a onclick="renderPage('500')" href="#"
-            >Нашу незабываемую страницу с кодом 500</a
-          >
-        </li>
-      </ul>
-    </nav>
-  </div>
+    <div class="currentchat__msg currentchat__empty">
+      <nav>
+        <p>Выберите чат чтобы отправить сообщение</p>
+      </nav>
+    </div>
   {{/if}}
 </div>

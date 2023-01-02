@@ -9,6 +9,7 @@ export interface ProfileFieldProps {
   title: string;
   error: string;
   data?: string;
+  type?: string;
   funcValid: (value: string) => boolean;
 }
 
@@ -18,6 +19,7 @@ export class ProfileField extends Block<ProfileFieldProps> {
       name: this.props.name,
       class: "profile-listitem__input",
       data: this.props.data,
+      type: this.props.type,
       events: {
         focus: (e) => {
           if (!e) return;

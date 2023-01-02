@@ -1,16 +1,16 @@
+import AuthController from "../../controllers/AuthController";
 import { Block } from "../../utils/block";
-import { renderPage } from "../../utils/render";
+import { Validation } from "../../utils/validation";
 import {
   PlaceHolderInput,
   PlaceHolderInputProps,
 } from "../../components/PlaceHolderInput/placeHolderInput";
 import { Button } from "../../components/Button/button";
+import { Link } from "../../components/Link/link";
 import styles from "./style.scss";
 import template from "./template.hbs";
-import { HTTPTransport } from "../../utils/HTTPTransport";
 
-interface LoginRegistrationProps {
-  action: string;
+interface LoginProps extends Record<string, any> {
   title: string;
   classWrapper?: string;
   linkText: string;
@@ -21,45 +21,54 @@ interface LoginRegistrationProps {
   events?: Record<string, () => void>;
 }
 
-export class LoginRegistration extends Block<LoginRegistrationProps> {
+export class Login extends Block<LoginProps> {
   init() {
-    this.children.fields = LoginRegistration.createPlaceHolderInputs(
-      this.props.fields
-    );
+    this.props.title = "Вход";
+    this.props.linkText = "Нет аккаунта?";
+    this.props.linkAction = "/register";
+    this.props.classWrapper = "form-login";
+    this.props.fields = [
+      {
+        name: "login",
+        type: "text",
+        placeholder: "Логин",
+        error:
+          "от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)",
+        funcValid: Validation.validLogin,
+      },
+      {
+        name: "password",
+        type: "password",
+        placeholder: "Пароль",
+        error:
+          "от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра",
+        funcValid: Validation.validPass,
+      },
+    ];
+
+    this.children.fields = Login.createPlaceHolderInputs(this.props.fields);
 
     this.props.events = { submit: this.handleSubmit.bind(this) };
 
-    if (this.props.action === "login") {
-      this.props.btnLabel = "Авторизоваться";
-      this.props.route = "messenger";
-      this.props.classWrapper = "form-login";
-    } else {
-      this.props.btnLabel = "Зарегистрироваться";
-      this.props.route = "messenger";
-      this.props.classWrapper = "form-registration";
-    }
-
     this.children.loginButton = new Button({
-      label: this.props.btnLabel,
+      label: "Авторизоваться",
+    });
+
+    this.children.link = new Link({
+      label: this.props.linkText,
+      href: this.props.linkAction,
+      class: "form__link",
     });
   }
 
   private handleSubmit(event?: Event) {
     event?.preventDefault();
 
-    const [fail, toServer] = LoginRegistration.checkFields(
+    const [fail, toServer] = Login.checkFields(
       this.children.fields as Array<PlaceHolderInput>
     );
     if (!fail) {
-      console.log(toServer);
-
-      const HttpRequest = new HTTPTransport();
-      const resp = HttpRequest.post("/", { data: toServer });
-      resp.catch((error) => {
-        console.log(error);
-      });
-
-      renderPage(this.props.route);
+      AuthController.signin(toServer as any);
     }
   }
 
