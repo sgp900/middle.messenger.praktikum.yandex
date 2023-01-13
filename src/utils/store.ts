@@ -35,6 +35,7 @@ export class Store extends EventBus {
 }
 
 const store = new Store();
+// @ts-expect-error
 window.store = store;
 
 export default store;

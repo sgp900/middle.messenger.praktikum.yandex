@@ -9,7 +9,7 @@ interface LinkProps extends PropsWithRouter {
   events?: Record<string, (e?: Event) => void>;
 }
 
-class BaseLink extends Block<LinkProps> {
+export class BaseLink extends Block<LinkProps> {
   constructor(props: LinkProps) {
     super({
       events: {

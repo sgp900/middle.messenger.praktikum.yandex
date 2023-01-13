@@ -48,10 +48,12 @@ export class Login extends Block<LoginProps> {
 
     this.children.fields = Login.createPlaceHolderInputs(this.props.fields);
 
-    this.props.events = { submit: this.handleSubmit.bind(this) };
-
     this.children.loginButton = new Button({
       label: "Авторизоваться",
+      type: "button",
+      events: {
+        click: () => this.handleSubmit(),
+      },
     });
 
     this.children.link = new Link({

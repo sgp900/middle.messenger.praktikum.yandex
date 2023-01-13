@@ -8,6 +8,7 @@ import Router from "./utils/router";
 import AuthController from "./controllers/AuthController";
 import { Messenger } from "./pages/Messenger/messenger";
 import { ErrorPage } from "./pages/ErrorPage/errorPage";
+import "./scss/style.scss";
 
 enum Routes {
   Index = "/",

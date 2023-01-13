@@ -151,6 +151,7 @@ export class Block<P extends Record<string, any> = any> {
     });
   }
 
+  // @ts-expect-error
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: P, newProps: P) {
     return true;
@@ -246,7 +247,6 @@ export class Block<P extends Record<string, any> = any> {
         const oldTarget = { ...target };
 
         target[prop] = value;
-
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
@@ -256,6 +256,7 @@ export class Block<P extends Record<string, any> = any> {
     });
   }
 
+  // @ts-expect-error
   private _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }

@@ -9,7 +9,7 @@ export interface PlaceHolderInputProps {
   class?: string;
   name: string;
   type?: string;
-  placeholder: string;
+  placeholder?: string;
   error?: string;
   value?: string;
   funcValid?: (value: string) => boolean;
@@ -77,7 +77,7 @@ export class PlaceHolderInput extends Block<PlaceHolderInputProps> {
     return false;
   }
 
-  render(): DocumentFragment {
+  protected render(): DocumentFragment {
     return this.compile(template, { ...this.props, styles });
   }
 }
