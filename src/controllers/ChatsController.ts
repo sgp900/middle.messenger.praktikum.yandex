@@ -45,9 +45,13 @@ class ChatsController {
 
         users[chat.id] = allUser;
 
-        if (chat.avatar) {
-          const res = (await chatAPI.read(chat.avatar)) as Blob;
-          chat.avatarSrc = URL.createObjectURL(res);
+        if (chat.avatar && chat.avatar.length > 0) {
+          try {
+            const res = (await chatAPI.read(chat.avatar)) as Blob;
+            chat.avatarSrc = URL.createObjectURL(res);
+          } catch {
+            chat.avatarSrc = "";
+          }
         }
       })
     );
