@@ -78,6 +78,7 @@ class ChatList extends Block<ChatsListProps> {
   }
 
   protected componentDidUpdate(
+    // @ts-expect-error
     oldProps: ChatsListProps,
     newProps: ChatsListProps
   ): boolean {

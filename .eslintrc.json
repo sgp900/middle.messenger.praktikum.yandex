@@ -24,6 +24,8 @@
     "no-console": ["error", { "allow": ["log", "warn", "error"] }],
     "import/no-unresolved": "off",
     "no-underscore-dangle": "off",
-    "import/extensions": ["error", "ignorePackages", { "": "never" }]
+    "import/extensions": ["error", "ignorePackages", { "": "never" }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "max-classes-per-file": 0
   }
 }

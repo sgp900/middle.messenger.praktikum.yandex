@@ -42,7 +42,7 @@ export class WSTransport extends EventBus {
   }
 
   private setupPingPong() {
-    this.pingInterval = setInterval(() => {
+    this.pingInterval = window.setInterval(() => {
       this.send({ type: "ping" });
     }, 5000);
   }
